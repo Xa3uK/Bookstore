@@ -45,11 +45,7 @@ CREATE TABLE books
 (
     id           serial PRIMARY KEY,
     title        varchar(100)        NOT NULL,
-    vendor_code  int UNIQUE          NOT NULL,
-    pages        int                 NOT NULL,
     price        numeric             NOT NULL,
-    image_url    varchar(500) UNIQUE NOT NULL,
-    year         int                 NOT NULL,
     publisher_id int                 NOT NULL,
     sub_theme_id int                 NOT NULL,
     language_id  int                 NOT NULL,

@@ -1,9 +1,10 @@
 package org.fishbone.jpapractice.services;
 
+import java.util.List;
+import org.fishbone.jpapractice.models.Cover;
 import org.fishbone.jpapractice.models.Language;
-import org.fishbone.jpapractice.models.Publisher;
+import org.fishbone.jpapractice.repositories.CoverRepository;
 import org.fishbone.jpapractice.repositories.LanguageRepository;
-import org.fishbone.jpapractice.repositories.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +20,11 @@ public class LanguageService {
         this.languageRepository = languageRepository;
     }
 
-    public Language findById(int id) {
-        return languageRepository.findById(id).orElse(null);
+    public List<Language> findAll() {
+        return languageRepository.findAll();
+    }
+
+    public int getIdByName(String name) {
+        return languageRepository.findLanguageByName(name).getId();
     }
 }

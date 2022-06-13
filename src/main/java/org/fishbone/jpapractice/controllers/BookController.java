@@ -3,6 +3,7 @@ package org.fishbone.jpapractice.controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.fishbone.jpapractice.dto.BookDTO;
+import org.fishbone.jpapractice.mappers.Mapper;
 import org.fishbone.jpapractice.models.Author;
 import org.fishbone.jpapractice.models.Book;
 import org.fishbone.jpapractice.models.Cover;
@@ -27,61 +28,33 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookController {
 
     BookService bookService;
-    PublisherService publisherService;
-    AuthorService authorService;
-    CoverService coverService;
-    LanguageService languageService;
-    SubThemeService subThemeService;
+    Mapper mapper;
 
     @Autowired
-    public BookController(BookService bookService, PublisherService publisherService, AuthorService authorService,
-                          CoverService coverService, LanguageService languageService, SubThemeService subThemeService) {
+    public BookController(BookService bookService, Mapper mapper) {
         this.bookService = bookService;
-        this.publisherService = publisherService;
-        this.authorService = authorService;
-        this.coverService = coverService;
-        this.languageService = languageService;
-        this.subThemeService = subThemeService;
+        this.mapper = mapper;
     }
 
     @GetMapping("/all")
     public List<BookDTO> getAllBooks() {
         return bookService.findAll().stream()
-            .map(book -> getBookDto(book.getId()))
+            .map(book -> mapper.bookToDto(book))
             .collect(Collectors.toList());
     }
 
     @PostMapping
-    public void addBook(Book book) {
-        bookService.addBook(book);
+    public void addBook(BookDTO bookDto) {
+        bookService.addBook(mapper.dtoToBook(bookDto));
     }
 
     @GetMapping("/id")
     public BookDTO findById(int id) {
-        return getBookDto(id);
+        return mapper.bookToDto(bookService.findById(id));
     }
 
     @DeleteMapping("/delete")
-    public void deleteBookById(int id){
+    public void deleteBookById(int id) {
         bookService.deleteBookById(id);
-    }
-
-    public BookDTO getBookDto(int id){
-        Book book = bookService.findById(id);
-        Publisher publisher = publisherService.findById(book.getPublisherId());
-        Author author = authorService.findById(book.getAuthorId());
-        Cover cover = coverService.findById(book.getCoverId());
-        Language language = languageService.findById(book.getLanguageId());
-        SubTheme subTheme = subThemeService.findById(book.getSubThemeId());
-
-        return new BookDTO(
-            book.getTitle(),
-            book.getId(),
-            publisher.getName(),
-            language.getName(),
-            subTheme.getName(),
-            cover.getName(),
-            author.getName()
-        );
     }
 }

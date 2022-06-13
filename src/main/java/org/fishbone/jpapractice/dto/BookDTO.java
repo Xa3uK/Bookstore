@@ -8,9 +8,10 @@ import lombok.Data;
 public class BookDTO {
     String bookTitle;
     int id;
+    int price;
     String publisherName;
-    String language;
-    String subTheme;
-    String cover;
-    String author;
+    String languageType;
+    String subThemeName;
+    String coverType;
+    String authorName;
 }
