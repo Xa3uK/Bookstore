@@ -2,6 +2,7 @@ package org.fishbone.jpapractice.services;
 
 import java.util.List;
 import java.util.Optional;
+import org.fishbone.jpapractice.dto.BookDTO;
 import org.fishbone.jpapractice.models.Book;
 import org.fishbone.jpapractice.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,10 @@ public class BookService {
     public Book findById(int id){
         Optional<Book> book = bookRepository.findById(id);
         return book.orElse(null);
+    }
+
+    public List<Book> findBooksByAuthorId(int id){
+        return bookRepository.findBooksByAuthorId(id);
     }
 
     @Transactional

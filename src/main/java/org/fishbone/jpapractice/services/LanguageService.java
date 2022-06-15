@@ -1,9 +1,7 @@
 package org.fishbone.jpapractice.services;
 
 import java.util.List;
-import org.fishbone.jpapractice.models.Cover;
 import org.fishbone.jpapractice.models.Language;
-import org.fishbone.jpapractice.repositories.CoverRepository;
 import org.fishbone.jpapractice.repositories.LanguageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +22,13 @@ public class LanguageService {
         return languageRepository.findAll();
     }
 
+    @Transactional
     public int getIdByName(String name) {
+        if (languageRepository.findLanguageByName(name) == null) {
+            Language language = new Language();
+            language.setName(name);
+            languageRepository.save(language);
+        }
         return languageRepository.findLanguageByName(name).getId();
     }
 }

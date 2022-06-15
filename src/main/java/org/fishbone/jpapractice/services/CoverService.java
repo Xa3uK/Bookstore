@@ -2,9 +2,7 @@ package org.fishbone.jpapractice.services;
 
 import java.util.List;
 import org.fishbone.jpapractice.models.Cover;
-import org.fishbone.jpapractice.models.Publisher;
 import org.fishbone.jpapractice.repositories.CoverRepository;
-import org.fishbone.jpapractice.repositories.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,19 +11,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class CoverService {
 
-  CoverRepository coverRepository;
+    CoverRepository coverRepository;
 
-  @Autowired
+    @Autowired
     public CoverService(CoverRepository coverRepository) {
         this.coverRepository = coverRepository;
     }
 
-    public List<Cover> findAll(){
+    public List<Cover> findAll() {
         return coverRepository.findAll();
     }
 
-
-    public int getIdByName(String name){
-            return coverRepository.findCoverByName(name).getId();
+    @Transactional
+    public int getIdByName(String name) {
+        if (coverRepository.findCoverByName(name) == null) {
+            Cover cover = new Cover();
+            cover.setName(name);
+            coverRepository.save(cover);
+        }
+        return coverRepository.findCoverByName(name).getId();
     }
 }

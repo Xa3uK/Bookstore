@@ -4,12 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.fishbone.jpapractice.dto.BookDTO;
 import org.fishbone.jpapractice.mappers.Mapper;
-import org.fishbone.jpapractice.models.Author;
-import org.fishbone.jpapractice.models.Book;
-import org.fishbone.jpapractice.models.Cover;
-import org.fishbone.jpapractice.models.Language;
-import org.fishbone.jpapractice.models.Publisher;
-import org.fishbone.jpapractice.models.SubTheme;
 import org.fishbone.jpapractice.services.AuthorService;
 import org.fishbone.jpapractice.services.BookService;
 import org.fishbone.jpapractice.services.CoverService;
@@ -28,11 +22,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookController {
 
     BookService bookService;
+    PublisherService publisherService;
+    SubThemeService subThemeService;
+    LanguageService languageService;
+    CoverService coverService;
+    AuthorService authorService;
     Mapper mapper;
 
     @Autowired
-    public BookController(BookService bookService, Mapper mapper) {
+    public BookController(BookService bookService, PublisherService publisherService, SubThemeService subThemeService,
+                          LanguageService languageService, CoverService coverService, AuthorService authorService,
+                          Mapper mapper) {
         this.bookService = bookService;
+        this.publisherService = publisherService;
+        this.subThemeService = subThemeService;
+        this.languageService = languageService;
+        this.coverService = coverService;
+        this.authorService = authorService;
         this.mapper = mapper;
     }
 
@@ -45,7 +51,8 @@ public class BookController {
 
     @PostMapping
     public void addBook(BookDTO bookDto) {
-        bookService.addBook(mapper.dtoToBook(bookDto));
+        bookService.addBook(mapper.dtoToBook(bookDto, publisherService, subThemeService, languageService,
+            coverService, authorService));
     }
 
     @GetMapping("/id")

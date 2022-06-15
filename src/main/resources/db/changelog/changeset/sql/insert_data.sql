@@ -1,6 +1,6 @@
-INSERT INTO themes (theme)
-VALUES ('Business'),
-       ('Health');
+-- INSERT INTO themes (theme)
+-- VALUES ('Business'),
+--        ('Health');
 INSERT INTO languages (language)
 VALUES ('English'),
        ('Ukrainian'),
@@ -16,13 +16,13 @@ VALUES ('Hard'),
 INSERT INTO publishers (publisher)
 VALUES ('Vidavnitstvo Veselka'),
        ('Azbuka Print');
-INSERT INTO sub_themes (sub_theme, main_theme_id)
-VALUES ('Biznes v Tik Toke', 1),
-       ('Biznes v Instagrame', 1),
-       ('Biznes na arbuzah', 1),
-       ('Biznes na bazare', 1),
-       ('Pravilnoe pitanie', 2),
-       ('Uhod za litsom', 2);
+INSERT INTO sub_themes (sub_theme)
+VALUES ('Biznes v Tik Toke'),
+       ('Biznes v Instagrame'),
+       ('Biznes na arbuzah'),
+       ('Biznes na bazare'),
+       ('Pravilnoe pitanie'),
+       ('Uhod za litsom');
 INSERT INTO books (title, publisher_id, sub_theme_id, language_id, price, cover_id, author_id)
 VALUES ('Tik Tok minutka', 1, 1, 1, 400, 1, 2),
        ('InstaRaskrutka', 2, 2, 1, 350, 1, 3),
