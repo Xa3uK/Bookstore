@@ -23,12 +23,10 @@ public class LanguageService {
     }
 
     @Transactional
-    public int getIdByName(String name) {
-        if (languageRepository.findLanguageByName(name) == null) {
-            Language language = new Language();
-            language.setName(name);
-            languageRepository.save(language);
+    public Language findByName(String name){
+        if(languageRepository.findLanguageByName(name) == null){
+            languageRepository.save(new Language(name));
         }
-        return languageRepository.findLanguageByName(name).getId();
+        return languageRepository.findLanguageByName(name);
     }
 }

@@ -1,6 +1,5 @@
 package org.fishbone.jpapractice.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,10 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -32,38 +33,23 @@ public class Book {
     @Column(name = "price")
     int price;
 
-    @Column(name = "publisher_id")
-    int publisherId;
-
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "publisher_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "publisher_id")
     Publisher publisher;
 
-    @Column(name = "sub_theme_id")
-    int subThemeId;
-
-    @ManyToOne()
-    @JoinColumn(name = "sub_theme_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "sub_theme_id")
     SubTheme subTheme;
 
-    @Column(name = "language_id")
-    int languageId;
-
-    @ManyToOne()
-    @JoinColumn(name = "language_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "language_id")
     Language language;
 
-    @Column(name = "cover_id")
-    int coverId;
-
-    @ManyToOne()
-    @JoinColumn(name = "cover_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cover_id")
     Cover cover;
 
-    @Column(name = "author_id")
-    int authorId;
-
-    @ManyToOne()
-    @JoinColumn(name = "author_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id")
     Author author;
 }

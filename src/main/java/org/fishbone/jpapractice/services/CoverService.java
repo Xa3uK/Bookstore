@@ -23,12 +23,10 @@ public class CoverService {
     }
 
     @Transactional
-    public int getIdByName(String name) {
-        if (coverRepository.findCoverByName(name) == null) {
-            Cover cover = new Cover();
-            cover.setName(name);
-            coverRepository.save(cover);
+    public Cover findByName(String name){
+        if (coverRepository.findCoverByName(name) == null){
+            coverRepository.save(new Cover(name));
         }
-        return coverRepository.findCoverByName(name).getId();
+        return coverRepository.findCoverByName(name);
     }
 }

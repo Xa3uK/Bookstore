@@ -23,12 +23,10 @@ public class PublisherService {
     }
 
     @Transactional
-    public int getIdByName(String name) {
-        if (publisherRepository.findPublisherByName(name) == null) {
-            Publisher publisher = new Publisher();
-            publisher.setName(name);
-            publisherRepository.save(publisher);
+    public Publisher findByName(String name){
+        if (publisherRepository.findPublisherByName(name) == null){
+            publisherRepository.save(new Publisher(name));
         }
-        return publisherRepository.findPublisherByName(name).getId();
+        return publisherRepository.findPublisherByName(name);
     }
 }

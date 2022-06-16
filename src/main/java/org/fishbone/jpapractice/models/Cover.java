@@ -6,17 +6,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Entity
-@Table(name = "covers")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "covers")
 public class Cover {
 
     @Id
@@ -27,6 +30,11 @@ public class Cover {
     @Column(name = "cover_type")
     String name;
 
-    @OneToMany(mappedBy = "cover")
+    @OneToMany
+        @JoinColumn(name = "cover_id")
     List<Book> books;
+
+    public Cover(String name) {
+        this.name = name;
+    }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.fishbone.jpapractice.dto.BookDTO;
 import org.fishbone.jpapractice.mappers.Mapper;
+import org.fishbone.jpapractice.models.Book;
 import org.fishbone.jpapractice.services.AuthorService;
 import org.fishbone.jpapractice.services.BookService;
 import org.fishbone.jpapractice.services.CoverService;
@@ -51,6 +52,12 @@ public class BookController {
 
     @PostMapping
     public void addBook(BookDTO bookDto) {
+//        bookService.addBook(mapper.dtoToBook(bookDto, publisherService, subThemeService, languageService,
+//            coverService, authorService));
+        System.out.println(bookDto);
+        Book book = mapper.dtoToBook(bookDto, publisherService, subThemeService, languageService,
+            coverService, authorService);
+        System.out.println(book);
         bookService.addBook(mapper.dtoToBook(bookDto, publisherService, subThemeService, languageService,
             coverService, authorService));
     }

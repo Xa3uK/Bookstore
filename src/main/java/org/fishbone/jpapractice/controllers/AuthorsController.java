@@ -24,7 +24,8 @@ public class AuthorsController {
     Mapper mapper;
 
     @Autowired
-    public AuthorsController(AuthorService authorService, BookService bookService, Mapper mapper) {
+    public AuthorsController(AuthorService authorService, BookService bookService,
+                             Mapper mapper) {
         this.authorService = authorService;
         this.bookService = bookService;
         this.mapper = mapper;
@@ -63,5 +64,4 @@ public class AuthorsController {
     public void deleteById(int id) {
         authorService.deleteById(id);
     }
-
 }

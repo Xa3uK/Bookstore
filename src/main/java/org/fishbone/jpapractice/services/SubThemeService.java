@@ -23,12 +23,10 @@ public class SubThemeService {
     }
 
     @Transactional
-    public int getIdByName(String name) {
-        if (subThemeRepository.findSubThemeByName(name) == null) {
-            SubTheme subTheme = new SubTheme();
-            subTheme.setName(name);
-            subThemeRepository.save(subTheme);
+    public SubTheme findByName(String name){
+        if (subThemeRepository.findSubThemeByName(name) == null){
+            subThemeRepository.save(new SubTheme(name));
         }
-        return subThemeRepository.findSubThemeByName(name).getId();
+       return subThemeRepository.findSubThemeByName(name);
     }
 }
