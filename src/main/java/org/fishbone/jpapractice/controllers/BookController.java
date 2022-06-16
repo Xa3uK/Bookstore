@@ -52,12 +52,6 @@ public class BookController {
 
     @PostMapping
     public void addBook(BookDTO bookDto) {
-//        bookService.addBook(mapper.dtoToBook(bookDto, publisherService, subThemeService, languageService,
-//            coverService, authorService));
-        System.out.println(bookDto);
-        Book book = mapper.dtoToBook(bookDto, publisherService, subThemeService, languageService,
-            coverService, authorService);
-        System.out.println(book);
         bookService.addBook(mapper.dtoToBook(bookDto, publisherService, subThemeService, languageService,
             coverService, authorService));
     }
