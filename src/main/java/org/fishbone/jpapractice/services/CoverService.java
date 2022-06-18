@@ -23,7 +23,7 @@ public class CoverService {
     }
 
     @Transactional
-    public Cover findByName(String name){
+    public Cover findByNameOrSave(String name){
         if (coverRepository.findCoverByName(name) == null){
             coverRepository.save(new Cover(name));
         }

@@ -31,7 +31,7 @@ public class Cover {
     String name;
 
     @OneToMany
-        @JoinColumn(name = "cover_id")
+    @JoinColumn(name = "cover_id")
     List<Book> books;
 
     public Cover(String name) {

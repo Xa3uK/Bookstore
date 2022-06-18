@@ -1,9 +1,7 @@
 package org.fishbone.jpapractice.services;
 
 import java.util.List;
-import liquibase.pro.packaged.A;
 import org.fishbone.jpapractice.models.Author;
-import org.fishbone.jpapractice.models.Cover;
 import org.fishbone.jpapractice.repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +27,7 @@ public class AuthorService {
     }
 
     @Transactional
-    public Author findByName(String name) {
+    public Author findByNameOrSave(String name) {
         if (authorRepository.findAuthorByName(name) == null) {
             authorRepository.save(new Author(name));
         }

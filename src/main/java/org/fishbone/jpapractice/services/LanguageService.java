@@ -23,7 +23,7 @@ public class LanguageService {
     }
 
     @Transactional
-    public Language findByName(String name){
+    public Language findByNameOrSave(String name){
         if(languageRepository.findLanguageByName(name) == null){
             languageRepository.save(new Language(name));
         }

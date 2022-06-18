@@ -23,7 +23,7 @@ public class PublisherService {
     }
 
     @Transactional
-    public Publisher findByName(String name){
+    public Publisher findByNameOrSave(String name){
         if (publisherRepository.findPublisherByName(name) == null){
             publisherRepository.save(new Publisher(name));
         }

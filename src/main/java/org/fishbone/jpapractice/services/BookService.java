@@ -52,11 +52,11 @@ public class BookService {
 
     @Transactional
     public void addBook(Book book){
-        book.setCover(coverService.findByName(book.getCover().getName()));
-        book.setAuthor(authorService.findByName(book.getAuthor().getName()));
-        book.setLanguage(languageService.findByName(book.getLanguage().getName()));
-        book.setPublisher(publisherService.findByName(book.getPublisher().getName()));
-        book.setSubTheme(subThemeService.findByName(book.getSubTheme().getName()));
+        book.setCover(coverService.findByNameOrSave(book.getCover().getName()));
+        book.setAuthor(authorService.findByNameOrSave(book.getAuthor().getName()));
+        book.setLanguage(languageService.findByNameOrSave(book.getLanguage().getName()));
+        book.setPublisher(publisherService.findByNameOrSave(book.getPublisher().getName()));
+        book.setSubTheme(subThemeService.findByNameOrSave(book.getSubTheme().getName()));
         bookRepository.save(book);
     }
 }
