@@ -57,7 +57,7 @@ public class AuthorController {
     @Operation(summary = "Add new author", description = "Type name of new author or update name of existing author "
         + "by typing his Id too")
     public void addAuthor(AuthorDTO authorDTO) {
-        authorService.save(mapper.dtoToAuthor(authorDTO));
+        authorService.saveOrUpdate(mapper.dtoToAuthor(authorDTO));
     }
 
     @DeleteMapping

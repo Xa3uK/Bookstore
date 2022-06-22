@@ -9,12 +9,14 @@ import org.fishbone.jpapractice.repositories.BookCriteriaRepository.BookSearchCr
 import org.fishbone.jpapractice.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -38,13 +40,35 @@ public class BookController {
     }
 
     @GetMapping("/filter")
-    public ResponseEntity<Page<BookDTO>> getBooksWithFilter(BookPage bookPage, BookSearchCriteria bookSearchCriteria){
-        return new ResponseEntity<>(bookService.getAllWithFilter(bookPage, bookSearchCriteria), HttpStatus.OK);
+    public ResponseEntity<Page<BookDTO>> getBooksWithFilter(
+        @RequestParam(required = false, defaultValue = "0") Integer pageNumber,
+        @RequestParam(required = false, defaultValue = "5") Integer pageSize,
+        @RequestParam(required = false, defaultValue = "title") String sortBy,
+        @RequestParam(required = false, defaultValue = "ASC") Sort.Direction sortDirection,
+        @RequestParam(required = false) String title,
+        @RequestParam(required = false) String publisherTheme,
+        @RequestParam(required = false) String subThemeName,
+        @RequestParam(required = false) String authorName) {
+
+        return new ResponseEntity<>(bookService.getAllWithFilter(
+            new BookPage(pageNumber, pageSize, sortDirection, sortBy),
+            new BookSearchCriteria(title, publisherTheme, subThemeName, authorName)),
+            HttpStatus.OK
+        );
     }
 
     @PostMapping
-    public void addBook(BookDTO bookDto) {
-       bookService.addBook(mapper.dtoToBook(bookDto));
+    public void addBook(
+        @RequestParam String title,
+        @RequestParam Integer price,
+        @RequestParam String publisherName,
+        @RequestParam String languageName,
+        @RequestParam String authorName,
+        @RequestParam String subTheme,
+        @RequestParam String coverType) {
+
+        bookService.addBook(mapper.dtoToBook(
+            new BookDTO(title,price,publisherName,languageName,subTheme,coverType,authorName)));
     }
 
     @GetMapping("/id")

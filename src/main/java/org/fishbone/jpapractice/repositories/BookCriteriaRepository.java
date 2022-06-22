@@ -11,7 +11,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.fishbone.jpapractice.dto.BookDTO;
 import org.fishbone.jpapractice.mappers.Mapper;
 import org.fishbone.jpapractice.models.Book;
@@ -103,6 +105,8 @@ public class BookCriteriaRepository {
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class BookPage {
         private int pageNumber = 0;
         private int pageSize = 10;
@@ -111,6 +115,8 @@ public class BookCriteriaRepository {
     }
 
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class BookSearchCriteria {
         private String title;
         private String publisherName;

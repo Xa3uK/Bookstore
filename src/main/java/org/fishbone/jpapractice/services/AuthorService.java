@@ -1,6 +1,7 @@
 package org.fishbone.jpapractice.services;
 
 import java.util.List;
+import java.util.Optional;
 import org.fishbone.jpapractice.models.Author;
 import org.fishbone.jpapractice.repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,13 @@ public class AuthorService {
     }
 
     @Transactional
-    public void save(Author author) {
-        authorRepository.save(author);
+    public void saveOrUpdate(Author author) {
+        Optional<Author> optionalAuthor = authorRepository.findById(author.getId());
+        if (optionalAuthor.isPresent()) {
+            optionalAuthor.get().setName(author.getName());
+        } else {
+            authorRepository.save(author);
+        }
     }
 
     @Transactional

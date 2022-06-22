@@ -11,9 +11,18 @@ spring:
       ddl-auto: none
   main:
     allow-bean-definition-overriding: true
-  mvc:
-    pathmatch:
-      matching-strategy: ANT_PATH_MATCHER
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    doc-expansion: list
+  cache:
+    disabled: false
+  show-actuator: false
 
 
 
