@@ -9,6 +9,11 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: none
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
 
 springdoc:
   api-docs:
@@ -21,5 +26,9 @@ springdoc:
   cache:
     disabled: false
   show-actuator: false
+
+
+
+
 
 

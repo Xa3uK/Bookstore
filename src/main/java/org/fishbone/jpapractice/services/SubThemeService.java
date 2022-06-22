@@ -23,7 +23,7 @@ public class SubThemeService {
     }
 
     @Transactional
-    public SubTheme findByName(String name){
+    public SubTheme findByNameOrSave(String name){
         if (subThemeRepository.findSubThemeByName(name) == null){
             subThemeRepository.save(new SubTheme(name));
         }

@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/authors")
-public class AuthorsController {
+public class AuthorController {
 
     AuthorService authorService;
     BookService bookService;
     Mapper mapper;
 
     @Autowired
-    public AuthorsController(AuthorService authorService, BookService bookService,
-                             Mapper mapper) {
+    public AuthorController(AuthorService authorService, BookService bookService,
+                            Mapper mapper) {
         this.authorService = authorService;
         this.bookService = bookService;
         this.mapper = mapper;

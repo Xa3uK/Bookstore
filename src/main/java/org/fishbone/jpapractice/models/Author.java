@@ -1,5 +1,7 @@
 package org.fishbone.jpapractice.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,6 +34,7 @@ public class Author {
 
     @OneToMany
     @JoinColumn(name = "author_id")
+    @JsonBackReference
     List<Book> books;
 
     public Author(String name) {
