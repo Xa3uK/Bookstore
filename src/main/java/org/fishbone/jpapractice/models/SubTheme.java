@@ -1,6 +1,9 @@
 package org.fishbone.jpapractice.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +37,6 @@ public class SubTheme {
         this.name = name;
     }
 
-    @OneToMany
-    @JoinColumn(name = "sub_theme_id")
-    List<Book> books;
+    @OneToMany(mappedBy = "subTheme", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Book> books = new ArrayList<>();
 }

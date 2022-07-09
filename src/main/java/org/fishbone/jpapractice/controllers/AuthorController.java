@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/authors")
-public class AuthorsController {
+public class AuthorController {
 
     AuthorService authorService;
     BookService bookService;
     Mapper mapper;
 
     @Autowired
-    public AuthorsController(AuthorService authorService, BookService bookService,
-                             Mapper mapper) {
+    public AuthorController(AuthorService authorService, BookService bookService,
+                            Mapper mapper) {
         this.authorService = authorService;
         this.bookService = bookService;
         this.mapper = mapper;
@@ -57,7 +57,7 @@ public class AuthorsController {
     @Operation(summary = "Add new author", description = "Type name of new author or update name of existing author "
         + "by typing his Id too")
     public void addAuthor(AuthorDTO authorDTO) {
-        authorService.save(mapper.dtoToAuthor(authorDTO));
+        authorService.saveOrUpdate(mapper.dtoToAuthor(authorDTO));
     }
 
     @DeleteMapping

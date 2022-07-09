@@ -18,4 +18,15 @@ public class BookDTO {
     String subThemeName;
     String coverType;
     String authorName;
+
+    public BookDTO(String title, int price, String publisherName, String languageName, String subThemeName,
+                   String coverType, String authorName) {
+        this.title = title;
+        this.price = price;
+        this.publisherName = publisherName;
+        this.languageName = languageName;
+        this.subThemeName = subThemeName;
+        this.coverType = coverType;
+        this.authorName = authorName;
+    }
 }

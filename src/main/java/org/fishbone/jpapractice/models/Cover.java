@@ -1,6 +1,9 @@
 package org.fishbone.jpapractice.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,9 +33,8 @@ public class Cover {
     @Column(name = "cover_type")
     String name;
 
-    @OneToMany
-    @JoinColumn(name = "cover_id")
-    List<Book> books;
+    @OneToMany(mappedBy = "cover", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Book> books = new ArrayList<>();
 
     public Cover(String name) {
         this.name = name;
