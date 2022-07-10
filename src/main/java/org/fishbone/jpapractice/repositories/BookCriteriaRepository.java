@@ -75,9 +75,17 @@ public class BookCriteriaRepository {
 
     private void setOrder(BookPage bookPage, CriteriaQuery<Book> criteriaQuery, Root<Book> bookRoot) {
         if (bookPage.getSortDirection().equals(Direction.ASC)) {
-            criteriaQuery.orderBy(criteriaBuilder.asc(bookRoot.get(bookPage.getSortBy())));
+            if (bookPage.getSortBy().equals("title")) {
+                criteriaQuery.orderBy(criteriaBuilder.asc(bookRoot.get("title")));
+            } else {
+                criteriaQuery.orderBy(criteriaBuilder.asc(bookRoot.get(bookPage.getSortBy()).get("name")));
+            }
         } else {
-            criteriaQuery.orderBy(criteriaBuilder.desc(bookRoot.get(bookPage.getSortBy())));
+            if (bookPage.getSortBy().equals("title")) {
+                criteriaQuery.orderBy(criteriaBuilder.desc(bookRoot.get("title")));
+            } else {
+                criteriaQuery.orderBy(criteriaBuilder.desc(bookRoot.get(bookPage.getSortBy()).get("name")));
+            }
         }
     }
 
@@ -104,10 +112,12 @@ public class BookCriteriaRepository {
 
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
+
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     public static class BookPage {
+
         private int pageNumber = 0;
         private int pageSize = 10;
         private Sort.Direction sortDirection = Direction.ASC;
@@ -118,6 +128,7 @@ public class BookCriteriaRepository {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class BookSearchCriteria {
+
         private String title;
         private String publisherName;
         private String subThemeName;

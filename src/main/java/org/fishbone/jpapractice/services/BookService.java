@@ -1,15 +1,20 @@
 package org.fishbone.jpapractice.services;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.fishbone.jpapractice.dto.BookDTO;
+import org.fishbone.jpapractice.mappers.Mapper;
 import org.fishbone.jpapractice.models.Book;
 import org.fishbone.jpapractice.repositories.BookCriteriaRepository;
 import org.fishbone.jpapractice.repositories.BookCriteriaRepository.BookPage;
 import org.fishbone.jpapractice.repositories.BookCriteriaRepository.BookSearchCriteria;
 import org.fishbone.jpapractice.repositories.BookRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,10 +31,12 @@ public class BookService {
     private final SubThemeService subThemeService;
     private final BookCriteriaRepository bookCriteriaRepository;
 
+    private final Mapper mapper;
+
     public BookService(BookRepository bookRepository, AuthorService authorService, CoverService coverService,
                        LanguageService languageService, PublisherService publisherService,
                        SubThemeService subThemeService,
-                       BookCriteriaRepository bookCriteriaRepository) {
+                       BookCriteriaRepository bookCriteriaRepository, Mapper mapper) {
         this.bookRepository = bookRepository;
         this.authorService = authorService;
         this.coverService = coverService;
@@ -37,6 +44,7 @@ public class BookService {
         this.publisherService = publisherService;
         this.subThemeService = subThemeService;
         this.bookCriteriaRepository = bookCriteriaRepository;
+        this.mapper = mapper;
     }
 
     public List<Book> findAll() {

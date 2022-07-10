@@ -1,6 +1,5 @@
 package org.fishbone.jpapractice.controllers;
 
-import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.fishbone.jpapractice.dto.AuthorDTO;
@@ -32,7 +31,6 @@ public class AuthorController {
     }
 
     @GetMapping
-    @Operation(summary = "Get all authors", description = "Returns list of authors")
     public List<AuthorDTO> getAll() {
         return authorService.findAll().stream()
             .map(author -> mapper.authorToDto(author))
@@ -40,13 +38,11 @@ public class AuthorController {
     }
 
     @GetMapping("/id")
-    @Operation(summary = "Get author", description = "Returns author by Id")
     public AuthorDTO findById(int id) {
         return mapper.authorToDto(authorService.findById(id));
     }
 
     @GetMapping("allBooks")
-    @Operation(summary = "Get all author books", description = "Returns list of books by authorId param")
     public List<BookDTO> getAllBooksByAuthorId(int id) {
         return bookService.findBooksByAuthorId(id).stream()
             .map(book -> mapper.bookToDto(book))
@@ -54,8 +50,6 @@ public class AuthorController {
     }
 
     @PostMapping
-    @Operation(summary = "Add new author", description = "Type name of new author or update name of existing author "
-        + "by typing his Id too")
     public void addAuthor(AuthorDTO authorDTO) {
         authorService.saveOrUpdate(mapper.dtoToAuthor(authorDTO));
     }

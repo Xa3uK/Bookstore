@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <title>Bookstore</title>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1> Books </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table">
+        <thead>
+        <tr>
+          <th> Title</th>
+          <th> Author</th>
+          <th> Publisher</th>
+          <th> Theme</th>
+          <th> Price</th>
+          <th> Cover</th>
+          <th> Language</th>
+          <th> Book id</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${books.empty}">
+          <td colspan="2"> No Books Available</td>
+        </tr>
+        <tr th:each="book : ${books}">
+          <td><span th:text="${book.getTitle()}"> Title </span></td>
+          <td><span th:text="${book.getAuthorName()}"> Author </span></td>
+          <td><span th:text="${book.getPublisherName()}"> Publisher </span></td>
+          <td><span th:text="${book.getSubThemeName()}"> Theme </span></td>
+          <td><span th:text="${book.getPrice()}"> Price </span></td>
+          <td><span th:text="${book.getCoverType()}"> Cover </span></td>
+          <td><span th:text="${book.getLanguageName()}"> Language </span></td>
+          <td><span th:text="${book.getId()}"> id </span></td>
+        </tr>
+        </tbody>
+      </table>
+      <div th:if="${bookPage.totalPages > 0}" class="pagination"
+           th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/books/(pageSize=${bookPage.size}, pageNumber=${pageNumber - 1}, sortBy=${sortBy}, sortDirection=${sortDirection})}"
+           th:text=${pageNumber}
+           th:class="${pageNumber==bookPage.number + 1} ? active"></a>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <a class="btn btn-success" href="#" th:href="@{/books/create}"> Add Books </a>
+      <a class="btn btn-danger" href="#" th:href="@{/books/delete}"> Delete Books </a>
+      <div class="row">
+        <div class="col-md-3">
+          <h4>Search</h4>
+        </div>
+      </div>
+      <form th:method="POST" th:action="@{/books}">
+
+        <div class="form-group col-md-6">
+          <input type="text" class="form-control" placeholder="Title" id="title" name="title">
+        </div>
+        <div class="form-group col-md-6">
+          <input type="text" class="form-control" placeholder="Publisher" id="publisherName"
+                 name="publisherName">
+        </div>
+        <div class="form-group col-md-6">
+          <input type="text" class="form-control" placeholder="Theme" id="subThemeName"
+                 name="subThemeName">
+        </div>
+        <div class="form-group col-md-6">
+          <input type="text" id="authorName" placeholder="Author" class="form-control"
+                 name="authorName">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="sortBy">Sort by</label>
+          <select class="form-control" id="sortBy" name="sortBy">
+            <option value="title">Title</option>
+            <option value="author">Author</option>
+            <option value="subTheme">Theme</option>
+            <option value="publisher">Publisher</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="sortDirection">Sort direction</label>
+          <select class="form-control" id="sortDirection" name="sortDirection">
+            <option>ASC</option>
+            <option>DESC</option>
+          </select>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Find!">
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>
