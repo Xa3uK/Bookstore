@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.fishbone.jpapractice.dto.BookDTO;
 import org.fishbone.jpapractice.mappers.Mapper;
-import org.fishbone.jpapractice.models.Book;
 import org.fishbone.jpapractice.repositories.BookCriteriaRepository.BookPage;
 import org.fishbone.jpapractice.repositories.BookCriteriaRepository.BookSearchCriteria;
 import org.fishbone.jpapractice.services.BookService;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,8 +58,7 @@ public class BookController {
                 .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-
-        return "books/index";
+        return "index";
     }
 
     @PostMapping
@@ -90,13 +87,12 @@ public class BookController {
                 .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-
-        return "books/index";
+        return "index";
     }
 
     @GetMapping("/create")
     public String create(){
-        return "books/create";
+        return "create";
     }
 
     @PostMapping("/create")
@@ -128,6 +124,6 @@ public class BookController {
 
     @GetMapping("/delete")
     public String delete(){
-        return "books/delete";
+        return "delete";
     }
 }
