@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <title>My Wishlist</title>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1> Books </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table">
+        <thead>
+        <tr>
+          <th> Title</th>
+          <th> Author</th>
+          <th> Publisher</th>
+          <th> Theme</th>
+          <th> Price</th>
+          <th> Cover</th>
+          <th> Language</th>
+          <th> Book id</th>
+          <th> Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${books.empty}">
+          <td colspan="2"> No Books Available</td>
+        </tr>
+        <tr th:each="book : ${books}">
+          <td><span th:text="${book.getTitle()}"> Title </span></td>
+          <td><span th:text="${book.getAuthorName()}"> Author </span></td>
+          <td><span th:text="${book.getPublisherName()}"> Publisher </span></td>
+          <td><span th:text="${book.getSubThemeName()}"> Theme </span></td>
+          <td><span th:text="${book.getPrice()}"> Price </span></td>
+          <td><span th:text="${book.getCoverType()}"> Cover </span></td>
+          <td><span th:text="${book.getLanguageName()}"> Language </span></td>
+          <td><span th:text="${book.getId()}"> id </span></td>
+          <td><a class="btn btn-danger" th:href="@{/wishlist/{id}/delete(id=${book.getId()})}"> Delete </a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-8">
+      <a class="btn btn-warning" href="#" th:href="@{/books}"> Back </a>
+      <a class="btn btn-info" href="#" th:href="@{/logout}"> Logout </a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

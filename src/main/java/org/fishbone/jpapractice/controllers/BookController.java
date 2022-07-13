@@ -58,7 +58,7 @@ public class BookController {
                 .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-        return "index";
+        return "books_main";
     }
 
     @PostMapping
@@ -87,7 +87,7 @@ public class BookController {
                 .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-        return "index";
+        return "books_main";
     }
 
     @GetMapping("/create")

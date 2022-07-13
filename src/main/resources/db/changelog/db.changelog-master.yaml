@@ -3,4 +3,5 @@ databaseChangeLog:
       file: db/changelog/changeset/v.1.0.create_tables.yaml
   - include:
       file: db/changelog/changeset/v.2.0.insert_data.yaml
-
+  - include:
+      file: db/changelog/changeset/v.3.0.create_table_users_wishlist.yaml
