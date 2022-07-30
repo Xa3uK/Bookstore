@@ -1,10 +1,7 @@
--- INSERT INTO themes (theme)
--- VALUES ('Business'),
---        ('Health');
 INSERT INTO languages (language)
 VALUES ('English'),
        ('Ukrainian'),
-       ('French');
+       ('Spanish');
 INSERT INTO authors (author)
 VALUES ('Jan Pol Anatol'),
        ('Yasha Pistolet'),

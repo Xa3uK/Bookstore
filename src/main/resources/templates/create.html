@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <title>All Books</title>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Create new book</h4>
+        </div>
+      </div>
+      <form th:method="POST" th:action="@{/books/create}">
+
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="text" class="form-control" id="price" name="price">
+        </div>
+        <div class="form-group">
+          <label for="publisherName">Publisher</label>
+          <input type="text" class="form-control" id="publisherName" name="publisherName">
+        </div>
+        <div class="form-group">
+          <label for="languageName">Language</label>
+          <select class="form-control" id="languageName" name="languageName">
+            <option value="Ukrainian">Ukrainian</option>
+            <option value="English">English</option>
+            <option value="Spanish">Spanish</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="authorName">Author</label>
+          <input type="text" id="authorName" class="form-control" name="authorName">
+        </div>
+        <div class="form-group">
+          <label for="subThemeName">Theme</label>
+          <input type="text" class="form-control" id="subThemeName" name="subThemeName">
+        </div>
+        <div class="form-group">
+          <label for="coverType">Cover</label>
+          <select class="form-control" id="coverType" name="coverType">
+            <option value="Hard">Hard</option>
+            <option value="Soft">Soft</option>
+          </select>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Create!">
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>
