@@ -6,26 +6,38 @@
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 </head>
 <body>
+<script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      <h1> Books </h1>
+      <h1 th:text="#{books}">Books </h1>
     </div>
   </div>
+  <a class="py-2 d-none d-md-inline-block" href="#">
+
+    <select id="urlSelect"
+            onchange="window.location = jQuery('#urlSelect option:selected').val();">
+      <option><p th:text="#{language}"></p></option>
+      <option value="/books?lang=en" th:text="#{switch-en}">English</option>
+      <option value="/books?lang=it" th:text="#{switch-it}">Italian</option>
+      <option value="/books?lang=es" th:text="#{switch-es}">Spanish</option>
+    </select>
+  </a>
   <div class="row">
     <div class="col-sm-12">
       <table class="table">
         <thead>
         <tr>
-          <th> Title</th>
-          <th> Author</th>
-          <th> Publisher</th>
-          <th> Theme</th>
-          <th> Price</th>
-          <th> Cover</th>
-          <th> Language</th>
-          <th> Book id</th>
-          <th> Wishlist</th>
+          <th th:text="#{title}"> Title</th>
+          <th th:text="#{author}"> Author</th>
+          <th th:text="#{publisher}"> Publisher</th>
+          <th th:text="#{theme}"> Theme</th>
+          <th th:text="#{price}"> Price</th>
+          <th th:text="#{cover}"> Cover</th>
+          <th th:text="#{language}"> Language</th>
+          <th th:text="#{book-id}"> Book id</th>
+          <th th:text="#{wishlist}"> Wishlist</th>
         </tr>
         </thead>
         <tbody>
@@ -41,7 +53,7 @@
           <td><span th:text="${book.getCoverType()}"> Cover </span></td>
           <td><span th:text="${book.getLanguageName()}"> Language </span></td>
           <td><span th:text="${book.getId()}"> id </span></td>
-          <td><a class="btn btn-success" th:href="@{/wishlist/{id}/add(id=${book.getId()})}"> Add </a></td>
+          <td><a class="btn btn-success" th:href="@{/wishlist/{id}/add(id=${book.getId()})}" th:text="#{add}"> Add </a></td>
         </tr>
         </tbody>
       </table>
@@ -62,50 +74,50 @@
     </div>
     <div class="col-md-8">
       <div sec:authorize="hasRole('ADMIN')">
-        <a class="btn btn-success" href="#" th:href="@{/books/create}"> Add Books </a>
-        <a class="btn btn-danger" href="#" th:href="@{/books/delete}"> Delete Books </a>
+        <a class="btn btn-success" href="#" th:href="@{/books/create}" th:text="#{add-books}">Add Books</a>
+        <a class="btn btn-danger" href="#" th:href="@{/books/delete}" th:text="#{delete-books}"> Delete Books </a>
       </div>
-      <a class="btn btn-warning" href="#" th:href="@{/wishlist}"> My Wishlist </a>
-      <a class="btn btn-info" href="#" th:href="@{/logout}"> Logout </a>
+      <a class="btn btn-warning" href="#" th:href="@{/wishlist}" th:text="#{my-wishlist}"> My Wishlist </a>
+      <a class="btn btn-info" href="#" th:href="@{/logout}" th:text="#{logout}"> Logout </a>
       <div class="row">
         <div class="col-md-3">
-          <h4>Search</h4>
+          <h4 th:text="#{search}">Search</h4>
         </div>
       </div>
       <form th:method="GET" th:action="@{/books}">
 
         <div class="form-group col-md-6">
-          <input type="text" class="form-control" placeholder="Title" id="title" name="title">
+          <input type="text" class="form-control" th:placeholder="#{title}" id="title" name="title">
         </div>
         <div class="form-group col-md-6">
-          <input type="text" class="form-control" placeholder="Publisher" id="publisherName"
+          <input type="text" class="form-control" th:placeholder="#{publisher}" id="publisherName"
                  name="publisherName">
         </div>
         <div class="form-group col-md-6">
-          <input type="text" class="form-control" placeholder="Theme" id="subThemeName"
+          <input type="text" class="form-control" th:placeholder="#{theme}" id="subThemeName"
                  name="subThemeName">
         </div>
         <div class="form-group col-md-6">
-          <input type="text" id="authorName" placeholder="Author" class="form-control"
+          <input type="text" id="authorName" th:placeholder="#{author}" class="form-control"
                  name="authorName">
         </div>
         <div class="form-group col-md-6">
-          <label for="sortBy">Sort by</label>
+          <label for="sortBy" th:text="#{sort-by}">Sort by</label>
           <select class="form-control" id="sortBy" name="sortBy">
-            <option value="title">Title</option>
-            <option value="author">Author</option>
-            <option value="subTheme">Theme</option>
-            <option value="publisher">Publisher</option>
+            <option value="title" th:text="#{title}">Title</option>
+            <option value="author" th:text="#{author}">Author</option>
+            <option value="subTheme" th:text="#{theme}">Theme</option>
+            <option value="publisher" th:text="#{publisher}">Publisher</option>
           </select>
         </div>
         <div class="form-group col-md-6">
-          <label for="sortDirection">Sort direction</label>
+          <label for="sortDirection" th:text="#{sort-direction}">Sort direction</label>
           <select class="form-control" id="sortDirection" name="sortDirection">
             <option>ASC</option>
             <option>DESC</option>
           </select>
         </div>
-        <input type="submit" class="btn btn-primary" value="Find!">
+        <input type="submit" class="btn btn-primary" th:value="#{find}">
       </form>
     </div>
   </div>

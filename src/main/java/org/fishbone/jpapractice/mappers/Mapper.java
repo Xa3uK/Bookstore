@@ -1,8 +1,6 @@
 package org.fishbone.jpapractice.mappers;
 
-import org.fishbone.jpapractice.dto.AuthorDTO;
 import org.fishbone.jpapractice.dto.BookDTO;
-import org.fishbone.jpapractice.models.Author;
 import org.fishbone.jpapractice.models.Book;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapping;
