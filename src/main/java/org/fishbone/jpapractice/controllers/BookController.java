@@ -50,35 +50,10 @@ public class BookController {
         model.addAttribute("bookPage", bookPage);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("sortDirection", sortDirection);
-
-        int totalPages = bookPage.getTotalPages();
-        if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                .boxed()
-                .collect(Collectors.toList());
-            model.addAttribute("pageNumbers", pageNumbers);
-        }
-        return "books_main";
-    }
-
-    @PostMapping
-    public String getBooksWithFilter(Model model,
-                                     @RequestParam(required = false, defaultValue = "0") Integer pageNumber,
-                                     @RequestParam(required = false, defaultValue = "5") Integer pageSize,
-                                     @RequestParam(required = false, defaultValue = "title") String sortBy,
-                                     @RequestParam(required = false, defaultValue = "ASC") Sort.Direction sortDirection,
-                                     @RequestParam(required = false) String title,
-                                     @RequestParam(required = false) String publisherName,
-                                     @RequestParam(required = false) String subThemeName,
-                                     @RequestParam(required = false) String authorName) {
-
-        Page<BookDTO> bookPage = bookService.getAllWithFilter(new BookPage(pageNumber, pageSize, sortDirection, sortBy),
-            new BookSearchCriteria(title, publisherName, subThemeName, authorName));
-
-        model.addAttribute("books", bookPage.getContent());
-        model.addAttribute("bookPage", bookPage);
-        model.addAttribute("sortBy", sortBy);
-        model.addAttribute("sortDirection", sortDirection);
+        model.addAttribute("title", title);
+        model.addAttribute("publisherName",publisherName);
+        model.addAttribute("subThemeName", subThemeName);
+        model.addAttribute("authorName", authorName);
 
         int totalPages = bookPage.getTotalPages();
         if (totalPages > 0) {

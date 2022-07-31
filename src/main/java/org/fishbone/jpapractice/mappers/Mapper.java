@@ -24,8 +24,5 @@ public interface Mapper {
 
     @InheritInverseConfiguration
     BookDTO bookToDto(Book book);
-
-    AuthorDTO authorToDto(Author author);
-    Author dtoToAuthor(AuthorDTO authorDTO);
 }
 
