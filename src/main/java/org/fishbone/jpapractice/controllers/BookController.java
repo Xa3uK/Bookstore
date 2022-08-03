@@ -8,6 +8,8 @@ import org.fishbone.jpapractice.mappers.Mapper;
 import org.fishbone.jpapractice.repositories.BookCriteriaRepository.BookPage;
 import org.fishbone.jpapractice.repositories.BookCriteriaRepository.BookSearchCriteria;
 import org.fishbone.jpapractice.services.BookService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -22,8 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/books")
 public class BookController {
 
-    BookService bookService;
-    Mapper mapper;
+    private static final Logger LOGGER = LoggerFactory.getLogger(BookController.class);
+    private static BookService bookService;
+    private static Mapper mapper;
 
     @Autowired
     public BookController(BookService bookService, Mapper mapper) {
@@ -41,6 +44,7 @@ public class BookController {
                               @RequestParam(required = false) String publisherName,
                               @RequestParam(required = false) String subThemeName,
                               @RequestParam(required = false) String authorName) {
+        LOGGER.debug("Start: getAllBooks()");
 
         Page<BookDTO> bookPage = bookService.getAllWithFilter(new BookPage(pageNumber, pageSize, sortDirection,
                 sortBy),
@@ -51,7 +55,7 @@ public class BookController {
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("sortDirection", sortDirection);
         model.addAttribute("title", title);
-        model.addAttribute("publisherName",publisherName);
+        model.addAttribute("publisherName", publisherName);
         model.addAttribute("subThemeName", subThemeName);
         model.addAttribute("authorName", authorName);
 
@@ -62,11 +66,13 @@ public class BookController {
                 .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
+
+        LOGGER.debug("End: getAllBooks()");
         return "books_main";
     }
 
     @GetMapping("/create")
-    public String create(){
+    public String create() {
         return "create";
     }
 
@@ -80,9 +86,13 @@ public class BookController {
         @RequestParam String subThemeName,
         @RequestParam String coverType) {
 
+        LOGGER.debug("Start: addBook()");
+
         bookService.addBook(mapper.dtoToBook(
             new BookDTO(title, price, publisherName, languageName, subThemeName, coverType, authorName)));
 
+        LOGGER.debug("Book added successful");
+        LOGGER.debug("End: addBook()");
         return "redirect:/books";
     }
 
@@ -93,12 +103,16 @@ public class BookController {
 
     @PostMapping("/delete")
     public String deleteBookById(@RequestParam int id) {
+        LOGGER.debug("Start: deleteBookId()");
+
         bookService.deleteBookById(id);
+
+        LOGGER.debug("End: deleteBookId()");
         return "redirect:/books";
     }
 
     @GetMapping("/delete")
-    public String delete(){
+    public String delete() {
         return "delete";
     }
 }

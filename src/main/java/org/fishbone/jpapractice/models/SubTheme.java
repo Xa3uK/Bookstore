@@ -28,15 +28,15 @@ public class SubTheme {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column(name = "sub_theme")
-    String name;
+    private String name;
+
+    @OneToMany(mappedBy = "subTheme", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Book> books = new ArrayList<>();
 
     public SubTheme(String name) {
         this.name = name;
     }
-
-    @OneToMany(mappedBy = "subTheme", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Book> books = new ArrayList<>();
 }

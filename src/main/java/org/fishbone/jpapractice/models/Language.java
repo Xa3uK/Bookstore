@@ -28,15 +28,15 @@ public class Language {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column(name = "language")
-    String name;
+    private String name;
 
+    @OneToMany(mappedBy = "language", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Book> books = new ArrayList<>();
     public Language(String name) {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "language", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Book> books = new ArrayList<>();
 }

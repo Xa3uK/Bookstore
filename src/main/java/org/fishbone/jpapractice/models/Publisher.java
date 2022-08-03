@@ -28,15 +28,15 @@ public class Publisher {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column(name = "publisher")
-    String name;
+    private String name;
+
+    @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Book> books = new ArrayList<>();
 
     public Publisher(String name) {
         this.name = name;
     }
-
-    @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Book> books = new ArrayList<>();
 }

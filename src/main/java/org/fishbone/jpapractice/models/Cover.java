@@ -28,13 +28,13 @@ public class Cover {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column(name = "cover_type")
-    String name;
+    private String name;
 
     @OneToMany(mappedBy = "cover", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Book> books = new ArrayList<>();
+    private List<Book> books = new ArrayList<>();
 
     public Cover(String name) {
         this.name = name;

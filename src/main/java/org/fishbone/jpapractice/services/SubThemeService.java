@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class SubThemeService {
 
-   SubThemeRepository subThemeRepository;
+   private final SubThemeRepository subThemeRepository;
 
    @Autowired
     public SubThemeService(SubThemeRepository subThemeRepository) {

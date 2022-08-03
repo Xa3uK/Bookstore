@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class CoverService {
 
-    CoverRepository coverRepository;
+    private final CoverRepository coverRepository;
 
     @Autowired
     public CoverService(CoverRepository coverRepository) {

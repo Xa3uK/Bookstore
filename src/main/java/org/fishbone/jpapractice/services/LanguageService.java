@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class LanguageService {
 
-    LanguageRepository languageRepository;
+    private final LanguageRepository languageRepository;
 
     @Autowired
     public LanguageService(LanguageRepository languageRepository) {

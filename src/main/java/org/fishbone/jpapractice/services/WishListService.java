@@ -18,12 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class WishListService {
 
-    WishListRepository wishListRepository;
-    PersonDetailsService personDetailsService;
-    BookService bookService;
-    Mapper mapper;
+    private final WishListRepository wishListRepository;
+    private final PersonDetailsService personDetailsService;
+    private final BookService bookService;
+    private final Mapper mapper;
 
-   @Autowired
+    @Autowired
     public WishListService(WishListRepository wishListRepository, PersonDetailsService personDetailsService,
                            BookService bookService, Mapper mapper) {
         this.wishListRepository = wishListRepository;
@@ -41,12 +41,12 @@ public class WishListService {
 
         List<Wishlist> wishlistLists = wishListRepository.findWishlistsByPersonId(person.get().getId());
         boolean isExists = wishlistLists.stream().noneMatch(wish -> wish.getBook().getId() == bookId);
-        if (isExists){
+        if (isExists) {
             wishListRepository.save(new Wishlist(person.get(), book));
         }
     }
 
-    public List<BookDTO> findAll(){
+    public List<BookDTO> findAll() {
         String userName = ((UserDetails) SecurityContextHolder.getContext().getAuthentication()
             .getPrincipal()).getUsername();
 
@@ -54,12 +54,12 @@ public class WishListService {
         List<Wishlist> wishlistList = wishListRepository.findWishlistsByPersonId(person.get().getId());
 
         return wishlistList.stream()
-            .map(wish ->  mapper.bookToDto(bookService.findById(wish.getBook().getId())))
+            .map(wish -> mapper.bookToDto(bookService.findById(wish.getBook().getId())))
             .collect(Collectors.toList());
     }
 
     @Transactional
-    public void delete(int bookId){
+    public void delete(int bookId) {
         String userName = ((UserDetails) SecurityContextHolder.getContext().getAuthentication()
             .getPrincipal()).getUsername();
 

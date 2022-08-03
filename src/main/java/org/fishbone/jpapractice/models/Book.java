@@ -28,33 +28,33 @@ public class Book {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column(name = "title")
-    String title;
+    private String title;
 
     @Column(name = "price")
-    int price;
+    private int price;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "publisher_id")
-    Publisher publisher;
+    private Publisher publisher;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "sub_theme_id")
-    SubTheme subTheme;
+    private SubTheme subTheme;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "language_id")
-    Language language;
+    private Language language;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "cover_id")
-    Cover cover;
+    private Cover cover;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "author_id")
-    Author author;
+    private Author author;
 
     public Book(String title, int price, Publisher publisher, SubTheme subTheme, Language language, Cover cover,
                 Author author) {

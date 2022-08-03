@@ -11,6 +11,7 @@ import org.fishbone.jpapractice.repositories.BookCriteriaRepository;
 import org.fishbone.jpapractice.repositories.BookCriteriaRepository.BookPage;
 import org.fishbone.jpapractice.repositories.BookCriteriaRepository.BookSearchCriteria;
 import org.fishbone.jpapractice.repositories.BookRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -47,34 +48,18 @@ public class BookService {
         this.mapper = mapper;
     }
 
-    public List<Book> findAll() {
-        return bookRepository.findAll();
-    }
-
     public Book findById(int id) {
         Optional<Book> book = bookRepository.findById(id);
         return book.orElse(null);
     }
 
-    public List<Book> findBooksByAuthorId(int id) {
-        return bookRepository.findBooksByAuthorId(id);
-    }
-
-    public Page<BookDTO> getAllWithFilter(BookPage bookPage, BookSearchCriteria bookSearchCriteria){
+    public Page<BookDTO> getAllWithFilter(BookPage bookPage, BookSearchCriteria bookSearchCriteria) {
         return bookCriteriaRepository.findAllWithFilters(bookPage, bookSearchCriteria);
     }
 
     @Transactional
     public void deleteBookById(int id) {
         bookRepository.deleteById(id);
-    }
-
-    public Page<Book> findWithPaginationAndSorting(int offset, int pageSize, String field, String sortType) {
-        Direction sort = sortType.equals("asc")
-            ? Direction.ASC
-            : Direction.DESC;
-
-        return bookRepository.findAll(PageRequest.of(offset, pageSize).withSort(sort, field));
     }
 
     @Transactional

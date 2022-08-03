@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/wishlist")
 public class WishListController {
 
-    WishListService wishListService;
+    private static WishListService wishListService;
 
     @Autowired
     public WishListController(WishListService wishListService) {

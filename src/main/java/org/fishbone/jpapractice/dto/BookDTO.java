@@ -10,14 +10,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class BookDTO {
-    String title;
-    int id;
-    int price;
-    String publisherName;
-    String languageName;
-    String subThemeName;
-    String coverType;
-    String authorName;
+
+    private String title;
+    private int id;
+    private int price;
+    private String publisherName;
+    private String languageName;
+    private String subThemeName;
+    private String coverType;
+    private String authorName;
 
     public BookDTO(String title, int price, String publisherName, String languageName, String subThemeName,
                    String coverType, String authorName) {
