@@ -59,16 +59,11 @@ public class WishListService {
     }
 
     @Transactional
-    public void deleteWishListByUser(int bookId) {
+    public void deleteWishListByBookId(int bookId) {
         String userName = ((UserDetails) SecurityContextHolder.getContext().getAuthentication()
             .getPrincipal()).getUsername();
 
         Optional<Person> person = personDetailsService.findUserByName(userName);
         wishListRepository.deleteWishlistByBook_IdAndPerson_Id(bookId, person.get().getId());
-    }
-
-    @Transactional
-    public void deleteWishListbyBookId(int bookId){
-        wishListRepository.deleteWishlistByBook_Id(bookId);
     }
 }

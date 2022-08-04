@@ -46,7 +46,7 @@ public class WishListController {
     public String delete(Model model, @PathVariable("id") int bookId) {
         LOGGER.debug("Start: wishlistDelete()");
 
-        wishListService.deleteWishListByUser(bookId);
+        wishListService.deleteWishListByBookId(bookId);
         model.addAttribute("books", wishListService.findAll());
 
         LOGGER.debug("End: wishlistDelete()");

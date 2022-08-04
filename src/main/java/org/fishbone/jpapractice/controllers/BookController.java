@@ -105,9 +105,7 @@ public class BookController {
     public String deleteBook(@PathVariable("id") int id) {
         LOGGER.debug("Start: deleteBook()");
 
-        wishListService.deleteWishListbyBookId(id);
         bookService.deleteBookById(id);
-
 
         LOGGER.debug("End: deleteBook()");
         return "redirect:/books";
