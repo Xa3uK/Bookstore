@@ -3,6 +3,7 @@ package org.fishbone.jpapractice.controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import javax.validation.Valid;
 import org.fishbone.jpapractice.dto.BookDTO;
 import org.fishbone.jpapractice.mappers.Mapper;
 import org.fishbone.jpapractice.repositories.BookCriteriaRepository.BookPage;
@@ -15,7 +16,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -72,24 +75,20 @@ public class BookController {
     }
 
     @GetMapping("/create")
-    public String create() {
+    public String create(Model model) {
+        model.addAttribute("BookDTO", new BookDTO());
         return "create";
     }
 
     @PostMapping("/create")
-    public String addBook(
-        @RequestParam String title,
-        @RequestParam Integer price,
-        @RequestParam String publisherName,
-        @RequestParam String languageName,
-        @RequestParam String authorName,
-        @RequestParam String subThemeName,
-        @RequestParam String coverType) {
-
+    public String addBook(@ModelAttribute("BookDTO") @Valid BookDTO bookDTO, BindingResult bindingResult) {
         LOGGER.debug("Start: addBook()");
 
-        bookService.addBook(mapper.dtoToBook(
-            new BookDTO(title, price, publisherName, languageName, subThemeName, coverType, authorName)));
+        if (bindingResult.hasErrors()) {
+            return "/create";
+        }
+
+        bookService.addBook(mapper.dtoToBook(bookDTO));
 
         LOGGER.debug("Book added successful");
         LOGGER.debug("End: addBook()");

@@ -7,7 +7,7 @@ mvnw
 mvnw.cmd
 .mvn
 TODO
-Bookstore-backend-log.txt
+Bookstore-backend-log*
 
 ### STS ###
 .apt_generated
