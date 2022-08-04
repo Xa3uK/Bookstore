@@ -40,8 +40,8 @@ public class WishListService {
         Book book = bookService.findById(bookId);
 
         List<Wishlist> wishlistLists = wishListRepository.findWishlistsByPersonId(person.get().getId());
-        boolean isExists = wishlistLists.stream().noneMatch(wish -> wish.getBook().getId() == bookId);
-        if (isExists) {
+        boolean isExists = wishlistLists.stream().anyMatch(wish -> wish.getBook().getId() == bookId);
+        if (!isExists) {
             wishListRepository.save(new Wishlist(person.get(), book));
         }
     }
@@ -59,11 +59,16 @@ public class WishListService {
     }
 
     @Transactional
-    public void delete(int bookId) {
+    public void deleteWishListByUser(int bookId) {
         String userName = ((UserDetails) SecurityContextHolder.getContext().getAuthentication()
             .getPrincipal()).getUsername();
 
         Optional<Person> person = personDetailsService.findUserByName(userName);
         wishListRepository.deleteWishlistByBook_IdAndPerson_Id(bookId, person.get().getId());
+    }
+
+    @Transactional
+    public void deleteWishListbyBookId(int bookId){
+        wishListRepository.deleteWishlistByBook_Id(bookId);
     }
 }

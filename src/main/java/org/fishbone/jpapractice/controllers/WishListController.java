@@ -34,14 +34,22 @@ public class WishListController {
 
     @GetMapping
     public String getAll(Model model) {
+        LOGGER.debug("Start: wishlistGetAll()");
+
         model.addAttribute("books", wishListService.findAll());
+
+        LOGGER.debug("End: wishlistGetAll()");
         return "my_wishlist";
     }
 
     @GetMapping("{id}/delete")
     public String delete(Model model, @PathVariable("id") int bookId) {
-        wishListService.delete(bookId);
+        LOGGER.debug("Start: wishlistDelete()");
+
+        wishListService.deleteWishListByUser(bookId);
         model.addAttribute("books", wishListService.findAll());
+
+        LOGGER.debug("End: wishlistDelete()");
         return "my_wishlist";
     }
 }

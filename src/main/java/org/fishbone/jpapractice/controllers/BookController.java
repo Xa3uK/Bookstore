@@ -9,9 +9,9 @@ import org.fishbone.jpapractice.mappers.Mapper;
 import org.fishbone.jpapractice.repositories.BookCriteriaRepository.BookPage;
 import org.fishbone.jpapractice.repositories.BookCriteriaRepository.BookSearchCriteria;
 import org.fishbone.jpapractice.services.BookService;
+import org.fishbone.jpapractice.services.WishListService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -29,12 +29,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BookController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookController.class);
-    private static BookService bookService;
-    private static Mapper mapper;
+    private BookService bookService;
+    private WishListService wishListService;
+    private Mapper mapper;
 
-    @Autowired
-    public BookController(BookService bookService, Mapper mapper) {
+    public BookController(BookService bookService, WishListService wishListService, Mapper mapper) {
         this.bookService = bookService;
+        this.wishListService = wishListService;
         this.mapper = mapper;
     }
 
@@ -104,7 +105,9 @@ public class BookController {
     public String deleteBook(@PathVariable("id") int id) {
         LOGGER.debug("Start: deleteBook()");
 
+        wishListService.deleteWishListbyBookId(id);
         bookService.deleteBookById(id);
+
 
         LOGGER.debug("End: deleteBook()");
         return "redirect:/books";
