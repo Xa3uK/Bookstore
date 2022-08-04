@@ -54,6 +54,9 @@
           <td><span th:text="${book.getLanguageName()}"> Language </span></td>
           <td><span th:text="${book.getId()}"> id </span></td>
           <td><a class="btn btn-success" th:href="@{/wishlist/{id}/add(id=${book.getId()})}" th:text="#{add}"> Add </a></td>
+          <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <td><a class="btn btn-danger" th:href="@{/books/delete/{id}(id=${book.getId()})}" th:text="#{delete}"> Delete </a></td>
+          </div>
         </tr>
         </tbody>
       </table>
@@ -74,8 +77,7 @@
     </div>
     <div class="col-md-8">
       <div sec:authorize="hasRole('ADMIN')">
-        <a class="btn btn-success" href="#" th:href="@{/books/create}" th:text="#{add-books}">Add Books</a>
-        <a class="btn btn-danger" href="#" th:href="@{/books/delete}" th:text="#{delete-books}"> Delete Books </a>
+        <a class="btn btn-success" href="#" th:href="@{/books/create}">Add Books</a>
       </div>
       <a class="btn btn-warning" href="#" th:href="@{/wishlist}" th:text="#{my-wishlist}"> My Wishlist </a>
       <a class="btn btn-info" href="#" th:href="@{/logout}" th:text="#{logout}"> Logout </a>

@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -90,7 +91,6 @@ public class BookController {
 
         bookService.addBook(mapper.dtoToBook(bookDTO));
 
-        LOGGER.debug("Book added successful");
         LOGGER.debug("End: addBook()");
         return "redirect:/books";
     }
@@ -100,18 +100,13 @@ public class BookController {
         return mapper.bookToDto(bookService.findById(id));
     }
 
-    @PostMapping("/delete")
-    public String deleteBookById(@RequestParam int id) {
-        LOGGER.debug("Start: deleteBookId()");
+    @GetMapping("/delete/{id}")
+    public String deleteBook(@PathVariable("id") int id) {
+        LOGGER.debug("Start: deleteBook()");
 
         bookService.deleteBookById(id);
 
-        LOGGER.debug("End: deleteBookId()");
+        LOGGER.debug("End: deleteBook()");
         return "redirect:/books";
-    }
-
-    @GetMapping("/delete")
-    public String delete() {
-        return "delete";
     }
 }
