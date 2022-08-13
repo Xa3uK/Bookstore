@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,8 +28,10 @@ public class Person {
     private String userName;
 
     @Column(name = "password")
+    private String encodedPassword;
+
     @Size(min = 6, max = 15, message = "Password length must be between 6 and 15")
-    private String password;
+    private transient String pass;
 
     @Column(name = "role")
     private String role;

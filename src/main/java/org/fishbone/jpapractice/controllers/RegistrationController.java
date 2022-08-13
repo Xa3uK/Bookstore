@@ -3,6 +3,7 @@ package org.fishbone.jpapractice.controllers;
 import javax.validation.Valid;
 import org.fishbone.jpapractice.models.Person;
 import org.fishbone.jpapractice.services.PersonDetailsService;
+import org.fishbone.jpapractice.services.RegistrationService;
 import org.fishbone.jpapractice.utils.PersonValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    private final PersonDetailsService personDetailsService;
+    private final RegistrationService registrationService;
     private final PersonValidator personValidator;
 
-    public RegistrationController(PersonDetailsService personDetailsService, PersonValidator personValidator) {
-        this.personDetailsService = personDetailsService;
+    public RegistrationController(RegistrationService registrationService, PersonValidator personValidator) {
+        this.registrationService = registrationService;
         this.personValidator = personValidator;
     }
 
@@ -29,7 +30,7 @@ public class RegistrationController {
         if (bindingResult.hasErrors()) {
             return "/auth/registration";
         }
-        personDetailsService.register(person);
+        registrationService.register(person);
         return "redirect:/auth/login";
     }
 }

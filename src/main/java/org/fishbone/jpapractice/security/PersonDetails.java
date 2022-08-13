@@ -23,7 +23,7 @@ public class PersonDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.person.getPassword();
+        return this.person.getEncodedPassword();
     }
 
     @Override
