@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="container">
+  <h1>Registration</h1>
   <form th:method="post" th:action="@{/registration/reg}" th:object="${person}">
     <label for="userName">Enter username</label>
     <input type="text" name="userName" id="userName" th:field="*{userName}">
