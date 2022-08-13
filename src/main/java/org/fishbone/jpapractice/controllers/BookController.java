@@ -29,9 +29,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BookController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookController.class);
-    private BookService bookService;
-    private WishListService wishListService;
-    private Mapper mapper;
+    private final BookService bookService;
+    private final WishListService wishListService;
+    private final Mapper mapper;
 
     public BookController(BookService bookService, WishListService wishListService, Mapper mapper) {
         this.bookService = bookService;

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PersonDetailsService implements UserDetailsService {
@@ -32,5 +33,11 @@ public class PersonDetailsService implements UserDetailsService {
 
     public Optional<Person> findUserByName(String userName){
         return peopleRepository.findByUserName(userName);
+    }
+
+    @Transactional
+    public void register(Person person){
+        person.setRole("ROLE_USER");
+        peopleRepository.save(person);
     }
 }

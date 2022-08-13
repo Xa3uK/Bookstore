@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/wishlist")
 public class WishListController {
-    private static Logger LOGGER = LoggerFactory.getLogger(WishListController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WishListController.class);
 
-    private static WishListService wishListService;
+    private final WishListService wishListService;
 
     @Autowired
     public WishListController(WishListService wishListService) {

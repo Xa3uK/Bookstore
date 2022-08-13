@@ -25,11 +25,11 @@ public class Person {
     private int id;
 
     @Column(name = "username")
-    @NotEmpty
-    @Size(min = 2, max = 100, message = "Name length must be between 2 and 100, ok?")
+    @Size(min = 5, max = 100, message = "Name length must be between 5 and 100")
     private String userName;
 
     @Column(name = "password")
+    @Size(min = 6, max = 15, message = "Password length must be between 6 and 15")
     private String password;
 
     @Column(name = "role")
