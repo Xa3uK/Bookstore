@@ -5,3 +5,5 @@ databaseChangeLog:
       file: db/changelog/changeset/v.2.0.insert_data.yaml
   - include:
       file: db/changelog/changeset/v.3.0.create_table_users_wishlist.yaml
+  - include:
+      file: db/changelog/changeset/v.4.0.update_admin_password.yaml
