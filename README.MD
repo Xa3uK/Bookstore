@@ -12,7 +12,7 @@ Set your **PostgreSQL** database properties in `application.properties`
 
 Run application `http://localhost:18080` and enjoy!
 
-Current roles login password: `admin admin`, `user user`.
+ADMIN_ROLE credentials: `log:admin, pass:admin`.
 
 ## Technologies
 <ul>
