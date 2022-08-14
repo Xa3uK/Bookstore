@@ -80,7 +80,10 @@
         <a class="btn btn-success" href="#" th:href="@{/books/create}">Add Books</a>
       </div>
       <a class="btn btn-warning" href="#" th:href="@{/wishlist}" th:text="#{my-wishlist}"> My Wishlist </a>
-      <a class="btn btn-info" href="#" th:href="@{/logout}" th:text="#{logout}"> Logout </a>
+      <form th:action="@{/logout}" th:method="POST">
+        <input class="btn btn-info" type="submit" th:value="#{logout}">
+      </form>
+
       <div class="row">
         <div class="col-md-3">
           <h4 th:text="#{search}">Search</h4>
